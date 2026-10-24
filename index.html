@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScholarLink - Peer Academic & Resource Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="global-header" role="banner">
+    <div class="header-container">
+        <div class="logo-area">
+            <a href="#" onclick="navigateTo('home-view')" title="Return to ScholarLink Home">
+                <img src="Scholar_Link.png" alt="ScholarLink Logo" class="site-logo">
+            </a>
+        </div>
+        
+        <div class="header-search">
+            <form id="global-search-form" onsubmit="handleGlobalSearch(event)">
+                <label for="header-search-input" class="sr-only">Search academic modules or resources</label>
+                <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+                <input type="search" id="header-search-input" placeholder="Search module codes (e.g., IRMG6222, WEDE5020)...">
+                <button type="submit" class="search-submit-btn">Search</button>
+            </form>
+        </div>
+        
+        <nav class="main-nav" aria-label="Primary Site Navigation">
+            <ul>
+                <li><button class="nav-link active" id="nav-home" onclick="navigateTo('home-view')"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</button></li>
+                <li><button class="nav-link" id="nav-dashboard" onclick="navigateTo('dashboard-view')"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i> Portal</button></li>
+                <li><button class="nav-link" id="nav-search" onclick="navigateTo('search-view')"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> Finder</button></li>
+                <li><button class="nav-link" id="nav-social" onclick="navigateTo('social-view')"><i class="fa-solid fa-users" aria-hidden="true"></i> Requests</button></li>
+                <li><button class="nav-link" id="nav-profile" onclick="navigateTo('profile-view')"><i class="fa-solid fa-circle-user" aria-hidden="true"></i> Profile</button></li>
+                <li><button class="nav-link" id="nav-help" onclick="navigateTo('help-view')"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Help</button></li>
+                <li><button class="nav-link" id="nav-feedback" onclick="navigateTo('feedback-view')"><i class="fa-solid fa-heart" aria-hidden="true"></i> Feedback</button></li>
+            </ul>
+        </nav>
+        </div>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+        
+        <section id="home-view" class="app-view active-view">
+            <div class="hero-section">
+                <h1>Welcome back, Scholar! <span class="wave-emoji" aria-hidden="true">👋</span></h1>
+                <p>Collaborate, share notes, and excel in your IIE academic journey alongside your campus peers.</p>
+                <div class="hero-stats">
+                    <div class="stat-bubble"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i> 1,240 Shared Resources</div>
+                    <div class="stat-bubble"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 482 Peer Verified Guides</div>
+                </div>
+                <div class="weekly-motivation-banner" id="weekly-motivation">
+                    <i class="fa-solid fa-heart" aria-hidden="true"></i>
+                    <span id="motivation-message">Your contributions change lives. Keep going!</span>
+                </div>
+            </div>
+
+            <div class="home-split-layout">
+                <section class="dashboard-block split-card" aria-labelledby="recent-uploads-heading">
+                    <h2 id="recent-uploads-heading"><i class="fa-solid fa-bolt status-icon-active" aria-hidden="true"></i> Recent Community Contributions</h2>
+                    <div class="resource-list-mini" id="recent-uploads-container">
+                        </div>
+                </section>
+
+                <section class="dashboard-block split-card target-card" aria-labelledby="goal-tracker-heading">
+                    <h2 id="goal-tracker-heading"><i class="fa-solid fa-star status-icon-verify" aria-hidden="true"></i> Your Academic Tracker</h2>
+                    <div class="goal-tracker-content">
+                        <p>You are only <strong>2 approved uploads away</strong> from achieving the <span class="badge-inline">Knowledge Guardian</span> rank!</p>
+                        <div class="progress-container" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar-fill" style="width: 75%;">75% Complete</div>
+                        </div>
+                        <p class="emotional-encouragement">"Your contributions last week directly helped 14 students prepare for their modules!"</p>
+                    </div>
+                </section>
+
+                <section class="dashboard-block split-card impact-card" aria-labelledby="impact-heading">
+                    <h2 id="impact-heading"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Your Community Impact</h2>
+                    <div class="impact-stats">
+                        <div class="impact-stat">
+                            <span class="impact-number" id="students-helped">47</span>
+                            <span class="impact-label">Students Helped</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-number" id="study-hours-saved">234</span>
+                            <span class="impact-label">Study Hours Saved</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-number" id="peer-thanks">12</span>
+                            <span class="impact-label">Peer Thank Yous</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section id="dashboard-view" class="app-view">
+            <div class="view-header">
+                <h1>Student Portal & Faculties</h1>
+                <p>Select your primary academic department to filter specific curriculum course resources.</p>
+            </div>
+
+            <div class="faculty-grid">
+                <div class="faculty-card" onclick="triggerFacultySearch('Information Technology')" role="button" tabindex="0">
+                    <div class="faculty-icon it-bg"><i class="fa-solid fa-code" aria-hidden="true"></i></div>
+                    <h3>Information Technology</h3>
+                    <p>WEDE, HCIN, DATA, and programming modules</p>
+                    <span class="action-hint-text">Browse Vault <i class="fa-solid fa-chevron-right"></i></span>
+                </div>
+                <div class="faculty-card" onclick="triggerFacultySearch('Commerce')" role="button" tabindex="0">
+                    <div class="faculty-icon commerce-bg"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i></div>
+                    <h3>Commerce & Business Systems</h3>
+                    <p>IRMG, MANA, BMET, and Accounting packages</p>
+                    <span class="action-hint-text">Browse Vault <i class="fa-solid fa-chevron-right"></i></span>
+                </div>
+                <div class="faculty-card" onclick="triggerFacultySearch('Humanities')" role="button" tabindex="0">
+                    <div class="faculty-icon humanities-bg"><i class="fa-solid fa-book-open" aria-hidden="true"></i></div>
+                    <h3>Humanities & Social Sciences</h3>
+                    <p>Communication, Journalism, Media, and Law modules</p>
+                    <span class="action-hint-text">Browse Vault <i class="fa-solid fa-chevron-right"></i></span>
+                </div>
+            </div>
+        </section>
+
+        <section id="search-view" class="app-view">
+            <div class="view-header">
+                <h1>Academic Resource Finder</h1>
+                <p id="search-results-counter">Filtering verified community modules...</p>
+            </div>
+
+            <div class="search-layout">
+                <aside class="search-sidebar" aria-label="Filters Panel">
+                    <h3><i class="fa-solid fa-filter" aria-hidden="true"></i> Filter Content</h3>
+                    
+                    <div class="filter-group">
+                        <label for="filter-faculty">Faculty Scope</label>
+                        <select id="filter-faculty" onchange="applyFilters()">
+                            <option value="all">All Academic Faculties</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Commerce">Commerce & Business Systems</option>
+                            <option value="Humanities">Humanities</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-type">Document Type</label>
+                        <select id="filter-type" onchange="applyFilters()">
+                            <option value="all">All Content Types</option>
+                            <option value="Exam Prep">Exam Preparation Guides</option>
+                            <option value="Lecture Summaries">Lecture Summaries</option>
+                            <option value="Assignment Guides">Assignment Guides</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="sort-results">Sort By</label>
+                        <select id="sort-results" onchange="applyFilters()">
+                            <option value="relevance">Most Relevant</option>
+                            <option value="downloads">Most Downloads</option>
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                        </select>
+                    </div>
+
+                    <button class="clear-filters-btn" onclick="resetSearchFilters()">Reset Selection Criteria</button>
+                </aside>
+
+                <div class="search-results-main">
+                    <div class="results-grid" id="main-results-grid">
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="social-view" class="app-view">
+            <div class="view-header flex-header">
+                <div>
+                    <h1>Open Peer Resource Requests</h1>
+                    <p>Can't find a summary? Ask the community timeline, or fulfill an open request to build your Karma score.</p>
+                </div>
+                <button class="action-trigger-btn" onclick="toggleModal('request-modal', true)">
+                    <i class="fa-solid fa-plus" aria-hidden="true"></i> Post Resource Request
+                </button>
+            </div>
+
+            <div class="requests-board-grid" id="requests-board-container">
+                </div>
+        </section>
+
+        <section id="profile-view" class="app-view">
+            <div class="profile-card-banner">
+                <div class="profile-avatar-large">
+                    <i class="fa-solid fa-user-graduate" aria-hidden="true"></i>
+                </div>
+                <div class="profile-meta-text">
+                    <h1>Student Portal Hub Account</h1>
+                    <p class="institution-tag"><i class="fa-solid fa-building-columns" aria-hidden="true"></i> Rosebank College Campus Network</p>
+                    <div class="badge-row">
+                        <span class="badge badge-gold"><i class="fa-solid fa-award" aria-hidden="true"></i> Top Contributor</span>
+                        <span class="badge badge-blue"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Peer Verifier</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-block accessibility-settings-panel">
+                <h2><i class="fa-solid fa-sliders" aria-hidden="true"></i> WCAG 2.0 User Accessibility Configuration</h2>
+                <p>Modify display rules below to tailor your structural reading experience.</p>
+                <div class="control-actions-row">
+                    <button id="contrast-toggle" class="accessibility-action-btn" aria-pressed="false">
+                        <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i> Toggle High Contrast Space
+                    </button>
+                    <button id="font-increase-toggle" class="accessibility-action-btn" aria-pressed="false">
+                        <i class="fa-solid fa-text-height" aria-hidden="true"></i> Scale Text Size (Large Text)
+                    </button>
+                </div>
+            </div>
+
+            <div class="stats-overview-row">
+                <div class="metric-card">
+                    <span class="metric-num">14</span>
+                    <span class="metric-label">Shared Summaries</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-num">38</span>
+                    <span class="metric-label">Verification Audits</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-num" id="profile-karma-points">450</span>
+                    <span class="metric-label">Community Karma Points</span>
+                </div>
+            </div>
+
+            <div class="dashboard-block achievement-badges-panel">
+                <h2><i class="fa-solid fa-medal" aria-hidden="true"></i> Your Achievement Badges</h2>
+                <div class="badges-grid" id="badges-container">
+                    <div class="badge-card locked" id="badge-supporter">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        <span>Community Supporter</span>
+                        <small>Help 5 peers</small>
+                    </div>
+                    <div class="badge-card locked" id="badge-guardian">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Knowledge Guardian</span>
+                        <small>4 verified uploads</small>
+                    </div>
+                    <div class="badge-card locked" id="badge-verifier">
+                        <i class="fa-solid fa-check-double"></i>
+                        <span>Peer Verifier</span>
+                        <small>10 verifications</small>
+                    </div>
+                    <div class="badge-card locked" id="badge-popular">
+                        <i class="fa-solid fa-fire"></i>
+                        <span>Popular Contributor</span>
+                        <small>100+ downloads</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-block table-block">
+                <h2>Your Document Contribution Logs</h2>
+                <div class="responsive-table-scroll">
+                    <table class="data-log-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Document Asset Name</th>
+                                <th scope="col">Module Code</th>
+                                <th scope="col">Upload Date</th>
+                                <th scope="col">Community Audits</th>
+                                <th scope="col">Live Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Information Risk Analysis Framework Notes</td>
+                                <td><span class="table-tag">IRMG6222</span></td>
+                                <td>14 May 2026</td>
+                                <td>5 Approved Checks</td>
+                                <td><span class="badge badge-green"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Verified Live</span></td>
+                            </tr>
+                            <tr>
+                                <td>Advanced DOM Manipulation Mechanics</td>
+                                <td><span class="table-tag">WEDE5020</span></td>
+                                <td>12 April 2026</td>
+                                <td>0 Pending Checks</td>
+                                <td><span class="badge badge-amber"><i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> In Audit</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="help-view" class="app-view">
+            <div class="view-header">
+                <h1>Accessibility & System Guidance</h1>
+                <p>Learn how to navigate the platform using standard assistive technologies.</p>
+            </div>
+
+            <div class="help-layout-grid">
+                <div class="help-article-card">
+                    <h2><i class="fa-solid fa-keyboard" aria-hidden="true"></i> Keyboard Navigation Cheat-Sheet</h2>
+                    <p>This system fully supports clean standard keyboard tab-focus cycles:</p>
+                    <ul class="help-list">
+                        <li><strong>Tab Key:</strong> Navigates forward sequentially to active controls without traps.</li>
+                        <li><strong>Shift + Tab:</strong> Cycles focus backwards safely through elements.</li>
+                        <li><strong>Enter / Space:</strong> Triggers navigation hooks, form buttons, or details views.</li>
+                    </ul>
+                </div>
+
+                <div class="help-article-card">
+                    <h2><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Frequently Asked Questions</h2>
+                    <div class="faq-accordion-stack">
+                        <details class="faq-item">
+                            <summary>How does the Peer Verification workflow function?</summary>
+                            <p>Every uploaded module overview is verified by 3 independent student peers using a quality scoring rubric before it receives a verification badge.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Are academic referencing expectations maintained?</summary>
+                            <p>Yes. All summary sheets must adhere to current IIE Harvard Anglia style guide expectations, including correct in-text citations and complete reference lists.</p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="feedback-view" class="app-view">
+            <div class="view-header">
+                <h1>Help Us Build ScholarLink</h1>
+                <p>Your suggestions directly shape future releases. Let us know how your experience has been!</p>
+            </div>
+
+            <div class="feedback-page-layout">
+                <div class="form-container">
+                    <form id="system-feedback-form" onsubmit="handleFeedbackSubmission(event)">
+                        <div class="form-group">
+                            <label for="feedback-name">Your Full Name (Optional)</label>
+                            <input type="text" id="feedback-name" placeholder="e.g., Sipho N.">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feedback-sentiment">How does this platform make you feel? <span class="required">*</span></label>
+                            <select id="feedback-sentiment" required>
+                                <option value="" disabled selected>Select an emotion state summary...</option>
+                                <option value="Motivated">Highly Motivated & Encouraged</option>
+                                <option value="Supported">Supported in My Studies</option>
+                                <option value="Confused">A Bit Confused by Layout Architecture</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feedback-comments">Share Your Thoughts <span class="required">*</span></label>
+                            <textarea id="feedback-comments" rows="4" placeholder="Tell us what you love or what needs fixing..." required></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="primary-submit-btn">Transmit Feedback Safely</button>
+                        </div>
+                    </form>
+                </div>
+
+                <aside class="motivational-sidebar-panel" aria-label="Community quotes">
+                    <h3><i class="fa-solid fa-quote-left" aria-hidden="true"></i> Student Voice</h3>
+                    <blockquote class="motivational-quote">
+                        "ScholarLink reduced my assignment stress significantly. Navigating notes by module code is seamless!"
+                        <cite>— IIE Commerce Student</cite>
+                    </blockquote>
+                </aside>
+            </div>
+        </section>
+
+        <section id="detail-view" class="app-view">
+            <button class="back-btn" onclick="navigateTo('search-view')">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Return to Finder Grid
+            </button>
+            <div class="detail-grid-layout" id="active-detail-content">
+                </div>
+        </section>
+
+    </main>
+
+    <div class="modal-overlay hidden" id="request-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-box-window">
+            <div class="modal-header-row">
+                <h2 id="modal-title">Create a Study Resource Request</h2>
+                <button class="modal-close-icon-btn" onclick="toggleModal('request-modal', false)" aria-label="Close dialog window">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+            <form id="peer-request-form" onsubmit="handleRequestSubmission(event)">
+                <div class="form-group">
+                    <label for="req-module">Module Code context <span class="required">*</span></label>
+                    <input type="text" id="req-module" placeholder="e.g., HCIN6222" required>
+                </div>
+                <div class="form-group">
+                    <label for="req-details">What topics or materials do you need help with? <span class="required">*</span></label>
+                    <textarea id="req-details" rows="4" placeholder="Specify chapters, learning units, or reference requirements..." required></textarea>
+                </div>
+                <div class="modal-footer-actions">
+                    <button type="button" class="cancel-modal-btn" onclick="toggleModal('request-modal', false)">Cancel</button>
+                    <button type="submit" class="submit-modal-btn">Post Request to Board</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-notification" class="toast-popup hidden" role="alert" aria-live="assertive"></div>
+
+    <footer class="app-footer">
+        <p>&copy; 2026 ScholarLink Hub. POWERED by GRANT</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
