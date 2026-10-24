@@ -1,5 +1,5 @@
 /* ================= ScholarLink Interaction Application Engine ================= */
-// ENHANCED FOR POE CRITERIA 11-18 (ALL AT EXCELLENT LEVEL)
+
 
 let academicResources = [
     {
